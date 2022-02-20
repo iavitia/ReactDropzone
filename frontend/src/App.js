@@ -1,12 +1,21 @@
 import './App.css';
 import { useDropzone } from 'react-dropzone';
 import { useCallback, useState, useEffect } from 'react';
+import axios from 'axios';
 
 function App() {
   const [images, setImages] = useState([]);
 
   function handleUpload() {
     console.log('Uploading files...');
+    axios
+      .post('/upload', { images })
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
   }
 
   const onDrop = useCallback((acceptedFiles, rejectedFiles) => {
